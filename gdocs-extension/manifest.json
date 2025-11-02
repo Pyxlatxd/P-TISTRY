@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Google Docs Custom Button",
+  "version": "1.0",
+  "description": "Adds a custom button to the Google Docs toolbar.",
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://docs.google.com/document/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": [
+    "https://docs.google.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",  
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon100.png"
+    }
+  }
+}
