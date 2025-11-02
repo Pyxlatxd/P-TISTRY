@@ -1,0 +1,14 @@
+doc = fix_title_page(doc, font_name=font_name, font_size=font_size)
+
+    # Step 3: Heading detection + formatting
+    doc = ai_detect_and_apply_headings(doc, font_name=font_name, font_size=font_size)
+
+    # Step 4: Apply APA numerals
+    doc = apply_apa_numerals(doc)
+
+    # Step 5: Set margins
+    doc = set_docx_margins(doc)
+
+    # Step 6: Page numbers (optional)
+    if add_page_no:
+        doc = add_page_number(doc, font_name=font_name, font_size=font_size)
