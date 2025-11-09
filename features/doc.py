@@ -5,6 +5,8 @@ from features.title import fix_title_page
 from features.level_headings import ai_detect_and_apply_headings
 from features.numeral import apply_apa_numerals
 from features.quotation import format_apa_quotations
+from features.decide import decide_statistical_treatment
+from features.table import append_apa_table  # ⬅️ new import
 
 def build_apa_document(doc: Document, font_name="Times New Roman", font_size=12,
                        add_page_no=True, format_type="student"):
@@ -16,6 +18,7 @@ def build_apa_document(doc: Document, font_name="Times New Roman", font_size=12,
     4. Format quotations
     5. Heading detection
     6. Page numbers (optional)
+    7. Append sample APA table
     """
 
     # Step 1: Font, spacing, etc.
@@ -35,6 +38,17 @@ def build_apa_document(doc: Document, font_name="Times New Roman", font_size=12,
 
     # Step 6: Page numbers
     doc = add_page_number(doc, font_name=font_name, font_size=font_size,
-                              format_type=format_type, title_text=title_text)
+                          format_type=format_type, title_text=title_text)
+
+    # Step 7: AI reasoning for statistical treatment
+    decide_statistical_treatment(doc)
+
+    # Step 8: Append sample APA-style table at very end
+    sample_data = [
+        ["Variable", "Mean", "SD", "t", "p"],
+        ["Group A", "5.23", "1.12", "2.45", ".018"],
+        ["Group B", "4.87", "1.05", "—", "—"],
+    ]
+    append_apa_table(doc, table_number=1, title="Descriptive Statistics of Sample Data", data=sample_data)
 
     return doc
